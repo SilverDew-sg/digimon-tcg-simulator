@@ -295,7 +295,7 @@ public class GameService extends TextWebSocketHandler {
         deck.removeAll(drawnCards);
         return drawnCards;
     }
-
+    
     private void distributeCards(String gameId, String username1, String username2) throws IOException {
         Set<WebSocketSession> gameRoom = gameRooms.get(gameId);
 
@@ -329,10 +329,13 @@ public class GameService extends TextWebSocketHandler {
         }
     }
 
+
     private List<GameCard> createGameDeck(List<Card> deck) {
         List<GameCard> gameDeck = new ArrayList<>();
-
+        
         Collections.shuffle(deck, secureRand);
+        //added an additional shuffle to maximize randomness and fairness of setup
+        Collections.shuffle(deck.secureRand);
 
         for (Card card : deck) {
             GameCard newCard = new GameCard(
